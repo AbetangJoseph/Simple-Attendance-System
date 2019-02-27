@@ -4,10 +4,28 @@
             "firstname": "joe",
             "lastname": "abe",
             "gender": "male",
-            "rank": "developer",
+            "position": "developer",
+            "phone": "08123456789",
+            "meetings":[]
+        },
+        {
+            "id": 2,
+            "firstname": "james",
+            "lastname": "abel",
+            "gender": "male",
+            "position": "developer",
+            "phone": "08123456789",
+            "meetings":[]
+        },
+        {
+            "id": 3,
+            "firstname": "jane",
+            "lastname": "abe",
+            "gender": "male",
+            "position": "developer",
+            "phone": "08123456789",
             "meetings":[]
         }
-        
     ],
     "meeting": [{
         "id": 1,

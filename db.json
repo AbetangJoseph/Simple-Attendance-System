@@ -6,7 +6,7 @@
             "gender": "male",
             "position": "developer",
             "phone": "08123456789",
-            "meetings":[]
+            "attended": null
         },
         {
             "id": 2,
@@ -15,7 +15,7 @@
             "gender": "male",
             "position": "developer",
             "phone": "08123456789",
-            "meetings":[]
+            "attended": null
         },
         {
             "id": 3,
@@ -24,15 +24,9 @@
             "gender": "male",
             "position": "developer",
             "phone": "08123456789",
-            "meetings":[]
+            "attended": null
         }
-    ],
-    "meeting": [{
-        "id": 1,
-        "topic": "ict",
-        "venue": "decagon",
-        "date": "2-1-2018",
-        "attendees": []
-    }]
+    ]
+
 
 }

@@ -1,6 +1,5 @@
-$(document).ready(()=>{
-  
+$(document).ready(() => {
+   
+    $('#example').DataTable();
 
-
-    
 });

@@ -1,28 +1,33 @@
 {
+  "adminCredentials":{
+    "username": "decagon",
+    "password": "decagon"
+  },
+
   "employees": [
     {
-      "firstname": "af",
-      "lastname": "af",
-      "gender": "",
-      "position": "af",
-      "phone": "333",
-      "id": 1
-    },
-    {
-      "firstname": "gr4",
-      "lastname": "rag",
-      "gender": "",
-      "position": "arg",
-      "phone": "arg",
+      "firstname": "Isaac",
+      "lastname": "Brown",
+      "gender": "Male",
+      "position": "back-end dev",
+      "phone": "1-463-123-44",
       "id": 2
     },
     {
-      "firstname": "ag",
-      "lastname": "arg",
-      "gender": "Male",
-      "position": "arg",
-      "phone": "arg",
+      "firstname": "faith",
+      "lastname": "wamanda",
+      "gender": "Female",
+      "position": "tech writer",
+      "phone": "1-463-123-44",
       "id": 3
+    },
+    {
+      "firstname": "evan",
+      "lastname": "you",
+      "gender": "",
+      "position": "senior dev",
+      "phone": "238924843939",
+      "id": 4
     }
   ]
 }

@@ -14,25 +14,22 @@
       integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <!-- <link rel="stylesheet" href="http://resources/demos/style.css"> -->
     <link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
  
     <main>
-      <!--Navbar-->
+      <!--START OF NAVBAR-->
       <nav class="navbar navbar-dark mb-5" style="background-color: #229954;">
         <div class="container">
           <a class="navbar-brand" href="#">Simple Attendance System</a>
         </div>
       </nav>
-      <!--End Navbar-->
-
-      <!-- Button trigger modal -->
-<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">
-    Launch demo modal
-  </button> -->
+      <!--End OF NAVBAR-->
   
-  <!-- Add Employee Modal -->
+  <!-- START OF ADD EMPLOYEE MODAL -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -105,11 +102,10 @@
       </div>
     </div>
   </div>
+<!-- END OF ADD EMPLOYEE MODAL -->
 
-  <!--End Modal-->
 
-
-  <!--View employee details Modal-->
+  <!--START OF VIEW SINGLE EMPLOYEE DETIALS MODAL-->
     <!-- Modal -->
     <div class="modal fade" id="employeeDetials" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -127,8 +123,84 @@
         </div>
       </div>
     </div>
+  <!--END OF VIEW SINGLE EMPLOYEE DETIALS MODAL-->
 
-  <!--end view employee details modal-->
+
+  <!-- START OF UPDATE EMPLOYEE MODAL -->
+  <div class="modal fade" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Update Employee Record</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <form id="employeeForm">
+                  <div class="form-group">
+                    <label for="formGroupExampleInput">First Name</label>
+                    <input
+                      type="text"
+                      class="form-control form-control-warning"
+                      placeholder="Firstname"
+                      id="firstname"  
+                    >
+                    
+                  </div>
+                  <div class="form-group">
+                      <label for="formGroupExampleInput">Last Name</label>
+                      <input
+                        type="text"
+                        class="form-control form-control-warning"
+                        placeholder="Lastname" 
+                        id="lastname" 
+                      >
+                     
+                    </div>
+                    <div class="form-group">
+                        <label for="formGroupExampleInput">Position</label>
+                        <input
+                          type="text"
+                          class="form-control form-control-warning"
+                          placeholder="Position"
+                          id="position"  
+                        >
+                        
+                      </div>
+                      
+                      <div class="form-group">
+                          <label for="formGroupExampleInput">Phone</label>
+                          <input
+                            type="tel"
+                            class="form-control form-control-warning"
+                            placeholder="Phone No."
+                            minlength="14"
+                            maxlength="12"
+                            id="phone"  
+                          >
+                          
+                        </div>
+                        <div class="form-group">
+                          
+                        </div>
+                        <select class="custom-select custom-select-sm" id="gender">
+                            
+                            <option selected disabled >Gender</option> 
+                            <option value="Male">Male</option> 
+                            <option value="Female">Female</option>             
+                        </select>
+                </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeAddModal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveButton">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  <!-- END OF UPDATE EMPLOYEE MODAL -->
+
 
       <div class="container">
         <ul class="nav nav-tabs">
@@ -180,12 +252,14 @@
       </div>
     </main>
 
+    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
     <script src="js/jquery.js"></script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>
     <script src="js/datatables.min.js"></script>
     <script src="js/bootstrap.datatables.min.js"></script>
+    <script src="https:code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/app.js"></script>
   </body>
 </html>

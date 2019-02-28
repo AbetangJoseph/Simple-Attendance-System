@@ -1,6 +1,8 @@
 let baseURL = 'http://localhost:3000/';
+let adminResponse = [];
 
 $(document).ready(() => {
+    
     $('.message a').click(function () {
         $('form').animate({
             height: "toggle",
@@ -9,16 +11,10 @@ $(document).ready(() => {
     });
 
 
-    //changepassword
-    let $currentPassword = $('#currentPassword').val()
-    let $newPassword = $('#newPassword').val()
-    let $confirmPassword = $('#confirmPassword').val()
-
-
     //Admin Login
     $('#loginButton').on('click', () => {
 
-        //login
+        //login fields
         let $username = $('#username').val()
         let $password = $('#password').val()
 
@@ -46,18 +42,45 @@ $(document).ready(() => {
                 type: "GET",
                 url: `${baseURL}adminCredentials`,
                 data: payload,
-                success: function (res) {
-                    console.log(res.username);
+                success: res => {
                     if (res.username === $username && res.username === $password) {
-                        alert('correct')
+                        window.location = 'index.html';
 
-                    }else{
-                        alert("incorrect details")
+                    } else {
+                        const Toast = Swal.mixin({
+                            toast: true,
+                            position: "top-end",
+                            showConfirmButton: false,
+                            timer: 4000
+                        });
+
+                        Toast.fire({
+                            type: "error",
+                            title: "Incorrect Login Details"
+                        });
                     }
-
+                    $("form :input").val("");
                 }
             });
         }
+    })
+
+
+    //Change Password
+    $('#changePasswordButton').on('click', () => {
+
+        
+
+        console.log(adminResponse);
+
+
+        //changepassword fields
+        let $currentPassword = $('#currentPassword').val()
+        let $newPassword = $('#newPassword').val()
+        let $confirmPassword = $('#confirmPassword').val()
+
+
+
     })
 
 

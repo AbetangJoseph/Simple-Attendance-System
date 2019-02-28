@@ -5,12 +5,44 @@
   },
   "employees": [
     {
-      "firstname": "faith",
-      "lastname": "wamanda",
+      "firstname": "Joseph",
+      "lastname": "Abetang",
+      "gender": "Male",
+      "position": "Software Developer",
+      "phone": "08122773761",
+      "id": 1
+    },
+    {
+      "firstname": "Young",
+      "lastname": "Nwashangai",
+      "gender": "Male",
+      "position": "Software Developer",
+      "phone": "0812345657",
+      "id": 2
+    },
+    {
+      "firstname": "Maria",
+      "lastname": "Drake",
       "gender": "Female",
-      "position": "tech writer",
-      "phone": "1-463-123-44",
-      "id": 3
+      "position": "Accountant",
+      "phone": "0701273658",
+      "id": 4
+    },
+    {
+      "firstname": "Lydia",
+      "lastname": "Mula",
+      "gender": "Female",
+      "position": "Technical Writer",
+      "phone": "0812736283",
+      "id": 5
+    },
+    {
+      "firstname": "Joseph",
+      "lastname": "Amakiri",
+      "gender": "Male",
+      "position": "web dev",
+      "phone": "02836939233",
+      "id": 6
     }
   ]
 }

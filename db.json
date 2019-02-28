@@ -1,18 +1,9 @@
 {
-  "adminCredentials":{
+  "adminCredentials": {
     "username": "decagon",
     "password": "decagon"
   },
-
   "employees": [
-    {
-      "firstname": "Isaac",
-      "lastname": "Brown",
-      "gender": "Male",
-      "position": "back-end dev",
-      "phone": "1-463-123-44",
-      "id": 2
-    },
     {
       "firstname": "faith",
       "lastname": "wamanda",
@@ -20,14 +11,6 @@
       "position": "tech writer",
       "phone": "1-463-123-44",
       "id": 3
-    },
-    {
-      "firstname": "evan",
-      "lastname": "you",
-      "gender": "",
-      "position": "senior dev",
-      "phone": "238924843939",
-      "id": 4
     }
   ]
 }

@@ -1,10 +1,8 @@
 let BaseURL = "http://127.0.0.1:3000/";
 let $tbody = $("#tbody"); //the body of the table where all table values are appended
 
-let list = []; //an array to later collect employee data
-$('.message a').click(function(){
-  $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
-});
+let ArrayOfEmployees = []; //an array to later collect employee data
+
 
 
 
@@ -16,7 +14,7 @@ let FetchAllEmployees = () => {
     success: res => {
       let response = "";
       $.each(res, (i, employees) => {
-        list = res; //ASSINING ALL EMPLOYEES INTO THE list ARRAY
+        ArrayOfEmployees = res; //ASSINING ALL EMPLOYEES INTO THE list ARRAY
         response += ` 
             <tr>
                <td>${employees.firstname}</td>
@@ -26,9 +24,11 @@ let FetchAllEmployees = () => {
                <td>${employees.phone}</td>
                <td><input type="text" id="datepicker"></td>
               
-               <td><span><button class="btn btn-secondary" onclick=getUser(${
+               <td><span><button class="btn btn-secondary" onclick=getEmployee(${
                  employees.id
-               }) data-toggle="modal" data-target="#employeeDetials"><i class="fas fa-eye"></i></button> <button class="btn btn-primary" data-toggle="modal" data-target="#updateEmployee"><i class="fas fa-pencil-alt"></i></button> <button onclick ="removeEmployee(${
+               }) data-toggle="modal" data-target="#employeeDetials"><i class="fas fa-eye"></i></button> <button class="btn btn-primary" data-toggle="modal" data-target="#updateEmployee" onclick= "updateEmployee(${
+                employees.id
+              })"><i class="fas fa-pencil-alt"></i></button> <button onclick ="removeEmployee(${
           employees.id
         })" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></span></td>
             </tr>
@@ -56,17 +56,33 @@ let FetchAllEmployees = () => {
 //END FETCH ALL
 
 
-//LOOPING THROUGH DATA GOTTEN FROM list ARRAY AND PICKING OUT EACH USER FOR THE VIEW A SPECIFIC USER
-const getUser = id => {
-  const user = list.find(element => element.id === id);
-  console.log(user);
-  $("#user").html(
+//LOOPING THROUGH DATA GOTTEN FROM list ARRAY AND PICKING OUT EACH USER FOR THE VIEW A SPECIFIC USER MODAL
+const getEmployee = id => {
+  const employee = ArrayOfEmployees.find(element => element.id === id);
+  console.log(employee);
+  $("#employee").html(
     `<div>
-        <span><p>First Name : ${user.firstname}</p><p>Last Name : ${user.lastname}</p><p>Position : ${user.position}</p></span>
+        <span><p>First Name : ${employee.firstname}</p><p>Last Name : ${employee.lastname}</p><p>Position : ${employee.position}</p></span>
             
     </div>`
   );
 };
+
+
+// const updateEmployee = id => {
+//   const user = list.find(element => element.id === id);
+//   console.log(user);
+//   $("#user").html(
+//     `<div>
+//         <span><p>First Name : ${user.firstname}</p><p>Last Name : ${user.lastname}</p><p>Position : ${user.position}</p></span>
+
+//     </div>`
+//   );
+// };
+
+
+
+
 
 let removeEmployee = emp_id => {
   Swal.fire({
@@ -114,11 +130,19 @@ let removeEmployee = emp_id => {
     }
   });
 };
+
+
+//UPDATING A SINGLE USER
+let updateEmployee = emp_id =>{
+
+}
+
+
 $(document).ready(() => {
   FetchAllEmployees();
 
-  $( function() {
-    $( "#datepicker" ).datepicker();
+  $(function () {
+    $("#datepicker").datepicker();
   });
 
   //ADDING AN EMPLOYEE (POST METHOD)

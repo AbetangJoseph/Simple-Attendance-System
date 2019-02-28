@@ -32,7 +32,7 @@
     Launch demo modal
   </button> -->
   
-  <!-- Modal -->
+  <!-- Add Employee Modal -->
   <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
@@ -43,47 +43,56 @@
           </button>
         </div>
         <div class="modal-body">
-            <form>
+            <form id="employeeForm">
                 <div class="form-group">
                   <label for="formGroupExampleInput">First Name</label>
                   <input
                     type="text"
                     class="form-control form-control-warning"
-                    placeholder="Firstname"  
+                    placeholder="Firstname"
+                    id="firstname"  
                   >
-                  <div class="invalid-feedback">This field is required.</div>
+                  
                 </div>
                 <div class="form-group">
                     <label for="formGroupExampleInput">Last Name</label>
                     <input
                       type="text"
                       class="form-control form-control-warning"
-                      placeholder="Lastname"  
+                      placeholder="Lastname" 
+                      id="lastname" 
                     >
-                    <div class="invalid-feedback">This field is required.</div>
+                   
                   </div>
                   <div class="form-group">
                       <label for="formGroupExampleInput">Position</label>
                       <input
                         type="text"
                         class="form-control form-control-warning"
-                        placeholder="Position"  
+                        placeholder="Position"
+                        id="position"  
                       >
-                      <div class="invalid-feedback">This field is required.</div>
+                      
                     </div>
                     
                     <div class="form-group">
                         <label for="formGroupExampleInput">Phone</label>
                         <input
-                          type="text"
+                          type="tel"
                           class="form-control form-control-warning"
-                          placeholder="Phone No."  
+                          placeholder="Phone No."
+                          minlength="14"
+                          maxlength="12"
+                          id="phone"  
                         >
-                        <div class="invalid-feedback">This field is required.</div>
+                        
                       </div>
-                      <select class="custom-select custom-select-sm"> 
+                      <div class="form-group">
+                        
+                      </div>
+                      <select class="custom-select custom-select-sm" id="gender">
                           
-                          <option selected>Gender</option> 
+                          <option selected disabled >Gender</option> 
                           <option value="Male">Male</option> 
                           <option value="Female">Female</option>             
                       </select>
@@ -91,13 +100,35 @@
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Save changes</button>
+          <button type="button" class="btn btn-primary" id="saveButton">Save changes</button>
         </div>
       </div>
     </div>
   </div>
 
   <!--End Modal-->
+
+
+  <!--View employee details Modal-->
+    <!-- Modal -->
+    <div class="modal fade" id="employeeDetials" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Employee Detalis</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+              <span><p>First Name : John Doe</p><p>Last Name : John Doe</p></span>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+  <!--end view employee details modal-->
 
       <div class="container">
         <ul class="nav nav-tabs">
@@ -110,15 +141,7 @@
               >Employees</a
             >
           </li>
-          <li class="nav-item">
-            <a
-              class="nav-link"
-              href="#attendance"
-              id="attendanceTab"
-              data-toggle="tab"
-              >Meeting Attendance</a
-            >
-          </li>
+          
         </ul>
 
         <div class="tab-content">

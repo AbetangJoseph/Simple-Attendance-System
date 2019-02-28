@@ -1,87 +1,28 @@
 {
   "employees": [
     {
-      "id": 1,
-      "firstname": "joe",
-      "lastname": "abe",
-      "gender": "male",
-      "position": "developer",
-      "phone": "08123456789",
-      "attended": []
-    },
-    {
-      "id": 2,
-      "firstname": "james",
-      "lastname": "abel",
-      "gender": "male",
-      "position": "developer",
-      "phone": "08123456789",
-      "attended": null
-    },
-    {
-      "id": 3,
-      "firstname": "jane",
-      "lastname": "abe",
-      "gender": "male",
-      "position": "developer",
-      "phone": "08123456789",
-      "attended": null
-    },
-    {
-      "firstname": "me",
-      "lastname": "rrt",
-      "gender": "",
-      "position": "arg",
-      "phone": "e",
-      "id": 4
-    },
-    {
-      "firstname": "aff",
-      "lastname": "af",
-      "gender": "Male",
-      "position": "af",
-      "phone": "af",
-      "id": 5
-    },
-    {
       "firstname": "af",
       "lastname": "af",
       "gender": "",
       "position": "af",
-      "phone": "af",
-      "id": 6
+      "phone": "333",
+      "id": 1
     },
     {
-      "firstname": "j",
-      "lastname": "af",
-      "gender": "Female",
-      "position": "ag",
-      "phone": "ag",
-      "id": 7
-    },
-    {
-      "firstname": "ag",
-      "lastname": "ag",
-      "gender": "Male",
-      "position": "a",
-      "phone": "af",
-      "id": 8
-    },
-    {
-      "firstname": "a",
-      "lastname": "ga",
-      "gender": "Male",
-      "position": "ag",
-      "phone": "1-463-123-44",
-      "id": 9
+      "firstname": "gr4",
+      "lastname": "rag",
+      "gender": "",
+      "position": "arg",
+      "phone": "arg",
+      "id": 2
     },
     {
       "firstname": "ag",
-      "lastname": "ag",
+      "lastname": "arg",
       "gender": "Male",
-      "position": "ag",
-      "phone": "ag",
-      "id": 10
+      "position": "arg",
+      "phone": "arg",
+      "id": 3
     }
   ]
 }

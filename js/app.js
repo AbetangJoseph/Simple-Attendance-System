@@ -22,7 +22,7 @@ let FetchAllEmployees = () => {
                <td>${employees.position}</td>
                <td>${employees.gender}</td>
                <td>${employees.phone}</td>
-               <td><input type="text" id="datepicker"> <button class="btn btn-outline-dark">update</button></td>
+               <td><input type="text" id="${employees.id}" onfocus=picDate(event)> <button class="btn btn-outline-dark" onclick=updateEmployeeStatus(${employees.id})>update</button></td>
               
                <td><span><button class="btn btn-outline-secondary" onclick=getEmployee(${
                  employees.id
@@ -58,6 +58,10 @@ let FetchAllEmployees = () => {
 
 //END FETCH ALL
 
+const picDate = (event) => {
+  $(`#${event.target.id}`).datepicker();
+}
+
 
 //LOOPING THROUGH DATA GOTTEN FROM list ARRAY AND PICKING OUT EACH USER FOR THE VIEW A SPECIFIC USER MODAL
 const getEmployee = id => {
@@ -86,11 +90,28 @@ const getEmployee = id => {
         <p><b>Gender</b></p>
         <p>${employee.gender}</p>
       </div>
-     
-    </div>
-</div> 
+
+      <div id="datepicker"></div>
+  </div> 
     `
   );
+
+  $(function () {
+    const eventDates = {};
+    employee.attendance.forEach( element => {
+      eventDates[ new Date( element )] = new Date( element );
+    });
+    $("#datepicker").datepicker({
+      beforeShowDay: function( date ) {
+        var highlight = eventDates[date];
+        if( highlight ) {
+             return [true, "event", 'Tooltip text'];
+        } else {
+             return [true, '', ''];
+        }
+      }
+    });
+  });
 };
 
 
@@ -229,19 +250,11 @@ $("#saveCHangesButton").on("click", () => {
     $("#updateposition").val() == "" ||
     $("#updatephone").val() == ""
   ) {
-    const Toast = Swal.mixin({
-      toast: true,
-      position: "top-end",
-      showConfirmButton: false,
-      timer: 4000
-    });
-
-    Toast.fire({
-      type: "info",
-      title: "please fill all fields!"
-    });
+    
+    notify("info", "please fill all fields");
   } else {
    
+    aw
     $.ajax({
       type: "PUT",
       url: `${BaseURL}employees/${employee.id}`,
@@ -251,38 +264,31 @@ $("#saveCHangesButton").on("click", () => {
         FetchAllEmployees();
 
         //alert if employee add successful
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 4000
-        });
-
-        Toast.fire({
-          type: "success",
-          title: "employee record Updated!"
-        });
+        notify("success", "employee record Updated");
 
         $('#updateEmployee').modal('hide');
       },
       error: () => {
         //alert if employee add unsuccessful
-        const Toast = Swal.mixin({
-          toast: true,
-          position: "top-end",
-          showConfirmButton: false,
-          timer: 4000
-        });
-
-        Toast.fire({
-          type: "error",
-          title: "update was not successful!"
-        });
+        notify("error", "update was not successful");
       }
     });
   }
 });
 //END OF UPDATE EMPLOYEE
+}
+
+const updateEmployeeStatus = async (id) => {
+  const attendance = ArrayOfEmployees.find(element => element.id === id).attendance;
+  const dateVal = $(`#${id}`).val();
+  attendance.push(dateVal);
+  const response = await request('patch', `employees/${id}`, { attendance })
+  if (response.status === 'success') {
+      FetchAllEmployees();
+      notify("success", "employee meeting status updated");
+    } else {
+      notify("error", "employee meeting status could not be updated");
+    }
 }
 
 
@@ -291,9 +297,9 @@ $(document).ready(() => {
   //FETCH ALL USERS ON PAGE LOAD
   FetchAllEmployees();
 
-  $(function () {
-    $("#datepicker").datepicker();
-  });
+  // $(function () {
+  //   $("#datepicker").datepicker();
+  // });
 
   //ADDING AN EMPLOYEE (POST METHOD)
   $("#saveButton").on("click", () => {
@@ -309,7 +315,7 @@ $(document).ready(() => {
       gender: $gender,
       position: $position,
       phone: $phone,
-      attended: []
+      attendance: []
     };
 
     //CHECKING INPUT FIELD FOR CONTENT BEFORE SENDING DATA

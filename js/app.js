@@ -41,17 +41,7 @@ let FetchAllEmployees = () => {
       $("#example").DataTable();
     },
     error: () => {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 4000
-      });
-
-      Toast.fire({
-        type: "error",
-        title: "content could not be retrieved"
-      });
+      notify("error", "content could not be retrieved!");
     }
   });
 };
@@ -105,7 +95,7 @@ const getEmployee = id => {
       beforeShowDay: function( date ) {
         var highlight = eventDates[date];
         if( highlight ) {
-             return [true, "event", 'Tooltip text'];
+             return [true, "event", 'Attended this meeting'];
         } else {
              return [true, '', ''];
         }
@@ -133,32 +123,12 @@ let removeEmployee = emp_id => {
         type: "DELETE",
         url: `${BaseURL}employees/${emp_id}`,
         success: () => {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 4000
-          });
+          notify("success", "employee record deleted!");
           FetchAllEmployees();
-
-          Toast.fire({
-            type: "success",
-            title: "employee record deleted"
-          });
         },
         error: () => {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 4000
-          });
+          notify("error", "record could not be added");
           FetchAllEmployees();
-
-          Toast.fire({
-            type: "error",
-            title: "record could not be deleted"
-          });
         }
       });
     }
@@ -179,8 +149,7 @@ let updateEmployee = emp_id => {
                       class="form-control form-control-warning"
                       placeholder="Firstname"
                       id="updatefirstname" 
-                      value="${employee.firstname}" 
-                    >
+                      value="${employee.firstname}">
                     
                   </div>
                   <div class="form-group">
@@ -254,7 +223,7 @@ $("#saveCHangesButton").on("click", () => {
     notify("info", "please fill all fields");
   } else {
    
-    aw
+    
     $.ajax({
       type: "PUT",
       url: `${BaseURL}employees/${employee.id}`,
@@ -263,13 +232,13 @@ $("#saveCHangesButton").on("click", () => {
 
         FetchAllEmployees();
 
-        //alert if employee add successful
+        //alert if employee update successful
         notify("success", "employee record Updated");
 
         $('#updateEmployee').modal('hide');
       },
       error: () => {
-        //alert if employee add unsuccessful
+        //alert if employee update unsuccessful
         notify("error", "update was not successful");
       }
     });
@@ -278,17 +247,23 @@ $("#saveCHangesButton").on("click", () => {
 //END OF UPDATE EMPLOYEE
 }
 
-const updateEmployeeStatus = async (id) => {
-  const attendance = ArrayOfEmployees.find(element => element.id === id).attendance;
-  const dateVal = $(`#${id}`).val();
-  attendance.push(dateVal);
-  const response = await request('patch', `employees/${id}`, { attendance })
+let updateEmployeeStatus = async (id) => {
+  let attendance = ArrayOfEmployees.find(element => element.id === id).attendance;
+
+  let dateVal = $(`#${id}`).val();
+  if(dateVal.trim() === ''){
+    notify("info", "please pick a date");
+  }else{
+    attendance.push(dateVal);
+  let response = await request('patch', `employees/${id}`, { attendance })
   if (response.status === 'success') {
       FetchAllEmployees();
       notify("success", "employee meeting status updated");
     } else {
       notify("error", "employee meeting status could not be updated");
     }
+  }
+  
 }
 
 
@@ -326,17 +301,7 @@ $(document).ready(() => {
       $gender == "" ||
       $phone.trim() == ""
     ) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 4000
-      });
-
-      Toast.fire({
-        type: "info",
-        title: "please fill all fields!"
-      });
+      notify("info", "please fill all fields!");
     } else {
       $.ajax({
         type: "POST",
@@ -347,33 +312,11 @@ $(document).ready(() => {
           FetchAllEmployees();
 
           //alert if employee add successful
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 4000
-          });
-
-          Toast.fire({
-            type: "success",
-            title: "employee added successfully!"
-          });
-
-          $("form :input").val("");
+          notify("success", "employee added successfully!");
         },
         error: () => {
           //alert if employee add unsuccessful
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 4000
-          });
-
-          Toast.fire({
-            type: "error",
-            title: "employee could not be added!"
-          });
+          notify("error", "employee could not be added!");
         }
       });
     }

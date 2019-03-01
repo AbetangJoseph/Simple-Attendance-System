@@ -5,59 +5,20 @@
   },
   "employees": [
     {
-      "firstname": "Joseph",
+      "firstname": "Josep",
       "lastname": "Amakiri",
-      "gender": "Male",
+      "gender": "Female",
       "position": "Software Developer",
       "phone": "08122773761",
-      "attendance": [
-        "03/11/2019",
-        "03/01/2019",
-        "02/20/2019",
-        "02/08/2019"
-      ],
       "id": 1
     },
     {
-      "firstname": "Young",
-      "lastname": "Nwashangai",
+      "firstname": "af",
+      "lastname": "af",
       "gender": "Male",
-      "position": "Software Developer",
-      "phone": "0812345657",
-      "attendance": [],
+      "position": "afd",
+      "phone": "1-463-123-44",
       "id": 2
-    },
-    {
-      "firstname": "Maria",
-      "lastname": "Drake",
-      "gender": "Female",
-      "position": "Accountant",
-      "phone": "0701273658",
-      "attendance": [],
-      "id": 4
-    },
-    {
-      "firstname": "Lydia",
-      "lastname": "Mula",
-      "gender": "Female",
-      "position": "Technical Writer",
-      "phone": "0812736283",
-      "attendance": [
-        ""
-      ],
-      "id": 5
-    },
-    {
-      "firstname": "Joseph",
-      "lastname": "Abetang",
-      "gender": "Male",
-      "position": "web dev",
-      "phone": "02836939233",
-      "attendance": [
-        22,
-        "03/03/2019"
-      ],
-      "id": 6
     }
   ]
 }

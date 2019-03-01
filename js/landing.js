@@ -25,18 +25,7 @@ $(document).ready(() => {
         }
 
         if ($username.trim() == '' || $password.trim() == '') {
-            const Toast = Swal.mixin({
-                toast: true,
-                position: "top-end",
-                showConfirmButton: false,
-                timer: 4000
-            });
-
-            Toast.fire({
-                type: "info",
-                title: "please fill all fields!"
-            });
-
+            notify("info", "please fill all fields!");
         } else {
             $.ajax({
                 type: "GET",

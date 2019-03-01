@@ -22,15 +22,15 @@ let FetchAllEmployees = () => {
                <td>${employees.position}</td>
                <td>${employees.gender}</td>
                <td>${employees.phone}</td>
-               <td><input type="text" id="datepicker"></td>
+               <td><input type="text" id="datepicker"> <button class="btn btn-outline-dark">update</button></td>
               
-               <td><span><button class="btn btn-secondary" onclick=getEmployee(${
+               <td><span><button class="btn btn-outline-secondary" onclick=getEmployee(${
                  employees.id
-               }) data-toggle="modal" data-target="#employeeDetials"><i class="fas fa-eye"></i></button> <button class="btn btn-primary" data-toggle="modal" data-target="#updateEmployee" onclick= "updateEmployee(${
+               }) data-toggle="modal" data-target="#employeeDetials"><i class="fas fa-eye"></i></button> <button class="btn btn-outline-primary" data-toggle="modal" data-target="#updateEmployee" onclick= "updateEmployee(${
                 employees.id
               })"><i class="fas fa-pencil-alt"></i></button> <button onclick ="removeEmployee(${
           employees.id
-        })" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></span></td>
+        })" class="btn btn-outline-danger"><i class="fas fa-trash-alt"></i></button></span></td>
             </tr>
              `;
       });
@@ -62,7 +62,6 @@ let FetchAllEmployees = () => {
 //LOOPING THROUGH DATA GOTTEN FROM list ARRAY AND PICKING OUT EACH USER FOR THE VIEW A SPECIFIC USER MODAL
 const getEmployee = id => {
   const employee = ArrayOfEmployees.find(element => element.id === id);
-  console.log(employee);
   $("#employee").html(
     `
   <div class="row mb-3" >
@@ -95,21 +94,9 @@ const getEmployee = id => {
 };
 
 
-// const updateEmployee = id => {
-//   const user = list.find(element => element.id === id);
-//   console.log(user);
-//   $("#user").html(
-//     `<div>
-//         <span><p>First Name : ${user.firstname}</p><p>Last Name : ${user.lastname}</p><p>Position : ${user.position}</p></span>
-
-//     </div>`
-//   );
-// };
 
 
-
-
-
+//DELETING A SINGLE EMPLOYEE RECORD
 let removeEmployee = emp_id => {
   Swal.fire({
     title: "Are you sure?",
@@ -156,12 +143,11 @@ let removeEmployee = emp_id => {
     }
   });
 };
-
+//END OF DELETIING AN EMPLOYEE
 
 //UPDATING A SINGLE USER
 let updateEmployee = emp_id => {
   const employee = ArrayOfEmployees.find(element => element.id === emp_id);
-  console.log(employee);
  $('#updateEmployeeBody').html(`
  
  <form id="updateEmployeeForm">
@@ -171,7 +157,7 @@ let updateEmployee = emp_id => {
                       type="text"
                       class="form-control form-control-warning"
                       placeholder="Firstname"
-                      id="firstname" 
+                      id="updatefirstname" 
                       value="${employee.firstname}" 
                     >
                     
@@ -182,7 +168,7 @@ let updateEmployee = emp_id => {
                         type="text"
                         class="form-control form-control-warning"
                         placeholder="Lastname" 
-                        id="lastname"
+                        id="updatelastname"
                         value="${employee.lastname}"
                       >
                      
@@ -193,7 +179,7 @@ let updateEmployee = emp_id => {
                           type="text"
                           class="form-control form-control-warning"
                           placeholder="Position"
-                          id="position"
+                          id="updateposition"
                           value="${employee.position}"  
                         >
                         
@@ -207,7 +193,7 @@ let updateEmployee = emp_id => {
                             placeholder="Phone No."
                             minlength="14"
                             maxlength="12"
-                            id="phone"
+                            id="updatephone"
                             value="${employee.phone}"  
                           >
                           
@@ -215,7 +201,7 @@ let updateEmployee = emp_id => {
                         <div class="form-group">
                           
                         </div>
-                        <select class="custom-select custom-select-sm" id="gender">
+                        <select class="custom-select custom-select-sm" id="updategender">
                             
                             <option selected>${employee.gender}</option> 
                             <option value="Male">Male</option> 
@@ -225,10 +211,84 @@ let updateEmployee = emp_id => {
  `)
 
 
+//UPDATE BUTTON
+$("#saveCHangesButton").on("click", () => {
+
+  let payload = {
+    firstname: $("#updatefirstname").val(),
+    lastname: $("#updatelastname").val(),
+    gender: $("#updategender").val(),
+    position: $("#updateposition").val(),
+    phone: $("#updatephone").val(),
+  };
+  //CHECKING INPUT FIELD FOR CONTENT BEFORE SENDING DATA
+  if (
+    $("#updatefirstname").val() == "" ||
+    $("#updatelastname").val() == "" ||
+    $("#updategender").val() == "" ||
+    $("#updateposition").val() == "" ||
+    $("#updatephone").val() == ""
+  ) {
+    const Toast = Swal.mixin({
+      toast: true,
+      position: "top-end",
+      showConfirmButton: false,
+      timer: 4000
+    });
+
+    Toast.fire({
+      type: "info",
+      title: "please fill all fields!"
+    });
+  } else {
+   
+    $.ajax({
+      type: "PUT",
+      url: `${BaseURL}employees/${employee.id}`,
+      data: payload,
+      success: employees => {
+
+        FetchAllEmployees();
+
+        //alert if employee add successful
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 4000
+        });
+
+        Toast.fire({
+          type: "success",
+          title: "employee record Updated!"
+        });
+
+        $('#updateEmployee').modal('hide');
+      },
+      error: () => {
+        //alert if employee add unsuccessful
+        const Toast = Swal.mixin({
+          toast: true,
+          position: "top-end",
+          showConfirmButton: false,
+          timer: 4000
+        });
+
+        Toast.fire({
+          type: "error",
+          title: "update was not successful!"
+        });
+      }
+    });
+  }
+});
+//END OF UPDATE EMPLOYEE
 }
 
 
+
 $(document).ready(() => {
+  //FETCH ALL USERS ON PAGE LOAD
   FetchAllEmployees();
 
   $(function () {
@@ -277,23 +337,6 @@ $(document).ready(() => {
         url: `${BaseURL}employees`,
         data: payload,
         success: employees => {
-          // let response = '';
-          // response += `
-          // <tr>
-          //    <td>${employees.firstname}</td>
-          //    <td>${employees.lastname}</td>
-          //    <td>${employees.position}</td>
-          //    <td>${employees.gender}</td>
-          //    <td>${employees.phone}</td>
-          //    <td><span><div class="custom-control custom-checkbox">
-          //        <input type="checkbox" class="custom-control-input" id="${employees.id}">
-          //        <label class="custom-control-label" for="${employees.id}">attended</label>
-          //      </div></span></td>
-          //    <td><span><button class="btn btn-secondary" data-toggle="modal" data-target="#employeeDetials"><i class="fas fa-eye"></i></button> <button class="btn btn-primary"><i class="fas fa-pencil-alt"></i></button> <button onclick = "removeEmployee(${employees.id})" class="btn btn-danger"><i class="fas fa-trash-alt"></i></button></span></td>
-          // </tr>
-          //  `
-
-          // $tbody.append(response);
 
           FetchAllEmployees();
 

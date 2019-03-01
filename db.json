@@ -6,10 +6,10 @@
   "employees": [
     {
       "firstname": "Joseph",
-      "lastname": "Abetang",
+      "lastname": "Amakiri",
       "gender": "Male",
-      "position": "Software Developer",
-      "phone": "08122773761",
+      "position": "web dev",
+      "phone": "02836939233",
       "id": 1
     },
     {
@@ -38,10 +38,10 @@
     },
     {
       "firstname": "Joseph",
-      "lastname": "Amakiri",
+      "lastname": "Abetang",
       "gender": "Male",
-      "position": "web dev",
-      "phone": "02836939233",
+      "position": "Cisco network analyst",
+      "phone": "1-463-123-44",
       "id": 6
     }
   ]

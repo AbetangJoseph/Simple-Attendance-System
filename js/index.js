@@ -12,8 +12,9 @@ $(document).ready(() => {
 
 
     //Admin Login
-    $('#loginButton').on('click', () => {
-
+    $('#loginButton').on('click', (e) => {
+        e.preventDefault();
+        
         //login fields
         let $username = $('#username').val()
         let $password = $('#password').val()
@@ -34,17 +35,18 @@ $(document).ready(() => {
 
             Toast.fire({
                 type: "info",
-                title: "please fill all fields!"
+                title: "Please fill all feilds"
             });
+           
 
         } else {
             $.ajax({
                 type: "GET",
                 url: `${baseURL}adminCredentials`,
                 data: payload,
-                success: res => {
+                success: (res) => {
                     if (res.username === $username && res.username === $password) {
-                        window.location = 'index.html';
+                        window.location = 'dashboard.html';
 
                     } else {
                         const Toast = Swal.mixin({
@@ -60,6 +62,20 @@ $(document).ready(() => {
                         });
                     }
                     $("form :input").val("");
+                },
+                error: ()=>{
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: "top-end",
+                        showConfirmButton: false,
+                        timer: 4000
+                    });
+
+                    Toast.fire({
+                        type: "error",
+                        title: "json server is down"
+                    });
+
                 }
             });
         }
@@ -68,23 +84,9 @@ $(document).ready(() => {
 
     //Change Password
     $('#changePasswordButton').on('click', () => {
-
-        
-
-        console.log(adminResponse);
-
-
         //changepassword fields
         let $currentPassword = $('#currentPassword').val()
         let $newPassword = $('#newPassword').val()
         let $confirmPassword = $('#confirmPassword').val()
-
-
-
     })
-
-
-
-
-
 })

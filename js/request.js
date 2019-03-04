@@ -11,7 +11,7 @@ const request = (type, urlString, payload = {}) => {
       }).then((res) => {
         return res.json();
       }).then((res) => {
-        return { status: 'success', data: res };
+        return { status: 'success', data: res, message: 'successfull' };
       }, (error) => {
         throw error;
       });
@@ -24,7 +24,7 @@ const request = (type, urlString, payload = {}) => {
       }).then((res) => {
         return res.json();
       }).then((res) => {
-        return { status: 'success', data: res };
+        return { status: 'success', data: res, message: 'record successfully added' };
       }, (error) => {
         throw error;
       });
@@ -37,7 +37,7 @@ const request = (type, urlString, payload = {}) => {
       }).then((res) => {
         return res.json();
       }).then((res) => {
-        return { status: 'success', data: res };
+        return { status: 'success', data: res, message: 'record successfully updated' };
       }, (error) => {
         throw error;
       });
@@ -50,7 +50,7 @@ const request = (type, urlString, payload = {}) => {
       }).then((res) => {
         return res.json();
       }).then((res) => {
-        return { status: 'success', data: res };
+        return { status: 'success', data: res, message: 'record successfully updated' };
       }, (error) => {
         throw error;
       });
@@ -63,13 +63,13 @@ const request = (type, urlString, payload = {}) => {
       }).then((res) => {
         return res.json();
       }).then((res) => {
-        return { status: 'success', data: res };
+        return { status: 'success', data: res, message: 'record successfully deleted' };
       }, (error) => {
         throw error;
       });
     }
   } catch (error) {
-    return { status: 'error', message: 'some unknown errors occured' };
+    return { status: 'error', message: error.message };
   }
   return { status: 'error', message: 'specify a valid request method' };
 }

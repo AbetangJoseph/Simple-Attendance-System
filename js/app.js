@@ -1,10 +1,7 @@
-let BaseURL = "http://127.0.0.1:3000/";
+const BaseURL = "http://127.0.0.1:3000/";
 let $tbody = $("#tbody"); //the body of the table where all table values are appended
 
 let ArrayOfEmployees = []; //an array to later collect employee data
-
-
-
 
 //fetch all users from db
 let FetchAllEmployees = () => {
@@ -22,8 +19,7 @@ let FetchAllEmployees = () => {
                <td>${employees.position}</td>
                <td>${employees.gender}</td>
                <td>${employees.phone}</td>
-               <td><input type="text" id="${employees.id}" onfocus=picDate(event)> <button class="btn btn-outline-dark" onclick=updateEmployeeStatus(${employees.id})>update</button></td>
-              
+               <td><input type="text" id="${employees.id}" onmousedown=picDate(event) placeholder="pick attendance date"> <button class="btn btn-outline-dark" onclick=updateEmployeeStatus(${employees.id})>update</button></td>            
                <td><span><button class="btn btn-outline-secondary" onclick=getEmployee(${
                  employees.id
                }) data-toggle="modal" data-target="#employeeDetials"><i class="fas fa-eye"></i></button> <button class="btn btn-outline-primary" data-toggle="modal" data-target="#updateEmployee" onclick= "updateEmployee(${
@@ -35,8 +31,6 @@ let FetchAllEmployees = () => {
              `;
       });
       $tbody.html(response);
-
-
 
       $("#example").DataTable();
     },
@@ -55,15 +49,15 @@ let FetchAllEmployees = () => {
     }
   });
 };
-
 //END FETCH ALL
 
+//TRIGGER DATEPICKER
 const picDate = (event) => {
-  $(`#${event.target.id}`).datepicker();
+  $(`#${event.target.id}`).datepicker({maxDate: new Date});
 }
+//END DATETRIGGER
 
-
-//LOOPING THROUGH DATA GOTTEN FROM list ARRAY AND PICKING OUT EACH USER FOR THE VIEW A SPECIFIC USER MODAL
+//LOOPING THROUGH DATA GOTTEN FROM ArrayOfEmployees ARRAY AND PICKING OUT EACH USER FOR THE VIEW A SPECIFIC USER MODAL
 const getEmployee = id => {
   const employee = ArrayOfEmployees.find(element => element.id === id);
   $("#employee").html(
@@ -105,7 +99,7 @@ const getEmployee = id => {
       beforeShowDay: function( date ) {
         var highlight = eventDates[date];
         if( highlight ) {
-             return [true, "event", 'Tooltip text'];
+             return [true, "event", 'Employee attended meeting on this day'];
         } else {
              return [true, '', ''];
         }
@@ -113,9 +107,6 @@ const getEmployee = id => {
     });
   });
 };
-
-
-
 
 //DELETING A SINGLE EMPLOYEE RECORD
 let removeEmployee = emp_id => {
@@ -133,32 +124,10 @@ let removeEmployee = emp_id => {
         type: "DELETE",
         url: `${BaseURL}employees/${emp_id}`,
         success: () => {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 4000
-          });
-          FetchAllEmployees();
-
-          Toast.fire({
-            type: "success",
-            title: "employee record deleted"
-          });
+          notify("success", "employee record deleted");
         },
         error: () => {
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 4000
-          });
-          FetchAllEmployees();
-
-          Toast.fire({
-            type: "error",
-            title: "record could not be deleted"
-          });
+          notify("error", "record could not be deleted")
         }
       });
     }
@@ -229,59 +198,59 @@ let updateEmployee = emp_id => {
                             <option value="Female">Female</option>             
                         </select>
                 </form>
- `)
+ `);
+ 
+ $("#update-emmployee-btn").html(`<button type="button" class="btn btn-primary" id="saveCHangesButton" onclick=updateBtn(${employee.id})>Save changes</button>`);
 
+}
 
-//UPDATE BUTTON
-$("#saveCHangesButton").on("click", () => {
+const updateBtn = async (id) => {
+  let $firstname = $("#updatefirstname").val().trim();
+  let $lastname =  $("#updatelastname").val().trim();
+  let $gender = $("#updategender").val().trim();
+  let $position =  $("#updateposition").val().trim();
+  let $phone = $("#updatephone").val().trim();
 
-  let payload = {
-    firstname: $("#updatefirstname").val(),
-    lastname: $("#updatelastname").val(),
-    gender: $("#updategender").val(),
-    position: $("#updateposition").val(),
-    phone: $("#updatephone").val(),
-  };
   //CHECKING INPUT FIELD FOR CONTENT BEFORE SENDING DATA
   if (
-    $("#updatefirstname").val() == "" ||
-    $("#updatelastname").val() == "" ||
-    $("#updategender").val() == "" ||
-    $("#updateposition").val() == "" ||
-    $("#updatephone").val() == ""
-  ) {
-    
+    $firstname == "" ||
+    $lastname == "" ||
+    $gender == "" ||
+    $position == "" ||
+    $phone == ""
+  ) { 
     notify("info", "please fill all fields");
   } else {
    
-    aw
-    $.ajax({
-      type: "PUT",
-      url: `${BaseURL}employees/${employee.id}`,
-      data: payload,
-      success: employees => {
-
-        FetchAllEmployees();
-
-        //alert if employee add successful
-        notify("success", "employee record Updated");
-
-        $('#updateEmployee').modal('hide');
-      },
-      error: () => {
-        //alert if employee add unsuccessful
-        notify("error", "update was not successful");
-      }
-    });
+    let payload = {
+      firstname : $firstname,
+      lastname : $lastname,
+      gender : $gender,
+      position : $position,
+      phone : $phone   
+    };
+    
+    const res = await request('patch', `employees/${id}`, payload);
+    if(res.status === 'success'){
+      FetchAllEmployees();
+      $('#updateEmployee').modal('hide');
+      notify(res.status, res.message);
+    }else{
+      $('#updateEmployee').modal('hide');
+      notify(res.status, res.message);
+    }    
   }
-});
-//END OF UPDATE EMPLOYEE
 }
 
 const updateEmployeeStatus = async (id) => {
   const attendance = ArrayOfEmployees.find(element => element.id === id).attendance;
   const dateVal = $(`#${id}`).val();
-  attendance.push(dateVal);
+
+  if(dateVal.trim() === ''){
+    notify("info", "please pick a date");
+
+  }else{
+    attendance.push(dateVal);
   const response = await request('patch', `employees/${id}`, { attendance })
   if (response.status === 'success') {
       FetchAllEmployees();
@@ -289,6 +258,7 @@ const updateEmployeeStatus = async (id) => {
     } else {
       notify("error", "employee meeting status could not be updated");
     }
+  } 
 }
 
 
@@ -297,12 +267,8 @@ $(document).ready(() => {
   //FETCH ALL USERS ON PAGE LOAD
   FetchAllEmployees();
 
-  // $(function () {
-  //   $("#datepicker").datepicker();
-  // });
-
   //ADDING AN EMPLOYEE (POST METHOD)
-  $("#saveButton").on("click", () => {
+  $("#saveButton").on("click", async () => {
     $firstname = $("#firstname").val();
     $lastname = $("#lastname").val();
     $gender = $("#gender").val();
@@ -326,58 +292,12 @@ $(document).ready(() => {
       $gender == "" ||
       $phone.trim() == ""
     ) {
-      const Toast = Swal.mixin({
-        toast: true,
-        position: "top-end",
-        showConfirmButton: false,
-        timer: 4000
-      });
-
-      Toast.fire({
-        type: "info",
-        title: "please fill all fields!"
-      });
+     notify('info', 'please fill all fields')
     } else {
-      $.ajax({
-        type: "POST",
-        url: `${BaseURL}employees`,
-        data: payload,
-        success: employees => {
-
-          FetchAllEmployees();
-
-          //alert if employee add successful
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 4000
-          });
-
-          Toast.fire({
-            type: "success",
-            title: "employee added successfully!"
-          });
-
-          $("form :input").val("");
-        },
-        error: () => {
-          //alert if employee add unsuccessful
-          const Toast = Swal.mixin({
-            toast: true,
-            position: "top-end",
-            showConfirmButton: false,
-            timer: 4000
-          });
-
-          Toast.fire({
-            type: "error",
-            title: "employee could not be added!"
-          });
-        }
-      });
+      const res = await request('post', 'employees', payload);
+      $("form :input").val("");
+      notify(res.status, res.message);     
     }
   });
-
 
 });

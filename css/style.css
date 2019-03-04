@@ -1,0 +1,13 @@
+#add-employee{
+    margin-top: 10px;
+    background-color: #229954;
+}
+
+#datepicker  {
+  margin-left: 20%; 
+}
+
+.event a {
+  background-color: #5FBA7D !important;
+  color: #ffffff !important;
+}

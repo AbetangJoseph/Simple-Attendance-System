@@ -16,16 +16,10 @@ $(document).ready(() => {
         e.preventDefault();
         
         //login fields
-        let $username = $('#username').val()
-        let $password = $('#password').val()
+        let $username = $('#username').val().trim();
+        let $password = $('#password').val().trim();
 
-
-        let payload = {
-            username: $username,
-            password: $password
-        }
-
-        if ($username.trim() == '' || $password.trim() == '') {
+        if ($username == '' || $password == '') {
             const Toast = Swal.mixin({
                 toast: true,
                 position: "top-end",
@@ -40,13 +34,22 @@ $(document).ready(() => {
            
 
         } else {
+            let payload = {
+                username: $username,
+                password: $password
+            }
+            
             $.ajax({
                 type: "GET",
                 url: `${baseURL}adminCredentials`,
                 data: payload,
                 success: (res) => {
                     if (res.username === $username && res.username === $password) {
-                        window.location = 'dashboard.html';
+                        /*if login credentials match with those in db.json, save 
+                        login credentials as a json object with the name 'admin' to localstorage */
+                        
+                        localStorage.setItem('admin', JSON.stringify(payload));
+                        location.replace('dashboard.html');
 
                     } else {
                         const Toast = Swal.mixin({

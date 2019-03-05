@@ -1,121 +1,100 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Attendance System</title>
-    <link rel="stylesheet" href="css/bootstrap.min.css" />
-    <link rel="stylesheet" href="css/sweetalert2.min.css" />
-    <link rel="stylesheet" href="css/datatables.min.css" />
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-      integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
-      crossorigin="anonymous"
-    />
-    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    
-    <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
-    <link rel="stylesheet" href="css/style.css" />
-  </head>
-  <body>
- 
-    <main>
-      <!--START OF NAVBAR-->
-      <nav class="navbar navbar-dark mb-5" style="background-color: #229954;">
-        <div class="container">
-          <a class="navbar-brand" href="#">Simple Meeting Attendance System</a>
-          <div>
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html"><i class="fas fa-power-off"></i> Logout <span class="sr-only">(current)</span></a>
-              </li>
-            </ul>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>Attendance System</title>
+  <link rel="stylesheet" href="css/bootstrap.min.css" />
+  <link rel="stylesheet" href="css/sweetalert2.min.css" />
+  <link rel="stylesheet" href="css/datatables.min.css" />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr"
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+  <link rel="stylesheet" href="https://jqueryui.com/resources/demos/style.css">
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+
+  <main>
+    <!--START OF NAVBAR-->
+    <nav class="navbar navbar-dark mb-5" style="background-color: #229954;">
+      <div class="container">
+        <a class="navbar-brand" href="#">Simple Meeting Attendance System</a>
+        <div>
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html" id="logoutBtn"><i class="fas fa-power-off"></i> Logout <span class="sr-only">(current)</span></a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!--End OF NAVBAR-->
+
+    <!-- START OF ADD EMPLOYEE MODAL -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Add New Employee</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
-        </div>
-      </nav>
-      <!--End OF NAVBAR-->
-  
-  <!-- START OF ADD EMPLOYEE MODAL -->
-  <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLongTitle">Add New Employee</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="modal-body">
+          <div class="modal-body">
             <form id="employeeForm">
-                <div class="form-group">
-                  <label for="formGroupExampleInput">First Name</label>
-                  <input
-                    type="text"
-                    class="form-control form-control-warning"
-                    placeholder="Firstname"
-                    id="firstname"  
-                  >
-                  
-                </div>
-                <div class="form-group">
-                    <label for="formGroupExampleInput">Last Name</label>
-                    <input
-                      type="text"
-                      class="form-control form-control-warning"
-                      placeholder="Lastname" 
-                      id="lastname" 
-                    >
-                   
-                  </div>
-                  <div class="form-group">
-                      <label for="formGroupExampleInput">Position</label>
-                      <input
-                        type="text"
-                        class="form-control form-control-warning"
-                        placeholder="Position"
-                        id="position"  
-                      >
-                      
-                    </div>
-                    
-                    <div class="form-group">
-                        <label for="formGroupExampleInput">Phone</label>
-                        <input
-                          type="tel"
-                          class="form-control form-control-warning"
-                          placeholder="Phone No."
-                          minlength="14"
-                          maxlength="12"
-                          id="phone"  
-                        >
-                        
-                      </div>
-                      <div class="form-group">
-                        
-                      </div>
-                      <select class="custom-select custom-select-sm" id="gender">
-                          
-                          <option selected disabled >Gender</option> 
-                          <option value="Male">Male</option> 
-                          <option value="Female">Female</option>             
-                      </select>
-              </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeAddModal">Close</button>
-          <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+              <div class="form-group">
+                <label for="formGroupExampleInput">First Name</label>
+                <input type="text" class="form-control form-control-warning" placeholder="Firstname" id="firstname">
+
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput">Last Name</label>
+                <input type="text" class="form-control form-control-warning" placeholder="Lastname" id="lastname">
+
+              </div>
+              <div class="form-group">
+                <label for="formGroupExampleInput">Position</label>
+                <input type="text" class="form-control form-control-warning" placeholder="Position" id="position">
+
+              </div>
+
+              <div class="form-group">
+                <label for="formGroupExampleInput">Phone</label>
+                <input type="tel" class="form-control form-control-warning" placeholder="Phone No." minlength="14"
+                  maxlength="12" id="phone">
+
+              </div>
+              <div class="form-group">
+
+              </div>
+              <select class="custom-select custom-select-sm" id="gender">
+
+                <option selected disabled>Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeAddModal">Close</button>
+            <button type="button" class="btn btn-primary" id="saveButton">Save</button>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-<!-- END OF ADD EMPLOYEE MODAL -->
+    <!-- END OF ADD EMPLOYEE MODAL -->
 
 
-  <!--START OF VIEW SINGLE EMPLOYEE DETIALS MODAL-->
+    <!--START OF VIEW SINGLE EMPLOYEE DETIALS MODAL-->
     <!-- Modal -->
-    <div class="modal fade" id="employeeDetials" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="employeeDetials" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -125,17 +104,18 @@
             </button>
           </div>
           <div class="modal-body" id="employee">
-              
+
           </div>
-          
+
         </div>
       </div>
     </div>
-  <!--END OF VIEW SINGLE EMPLOYEE DETIALS MODAL-->
+    <!--END OF VIEW SINGLE EMPLOYEE DETIALS MODAL-->
 
 
-  <!-- START OF UPDATE EMPLOYEE MODAL -->
-  <div class="modal fade" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <!-- START OF UPDATE EMPLOYEE MODAL -->
+    <div class="modal fade" id="updateEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -145,7 +125,7 @@
             </button>
           </div>
           <div class="modal-body" id="updateEmployeeBody">
-              
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeAddModal">Close</button>
@@ -154,67 +134,75 @@
         </div>
       </div>
     </div>
-  <!-- END OF UPDATE EMPLOYEE MODAL -->
+    <!-- END OF UPDATE EMPLOYEE MODAL -->
 
-      <div class="container">
-        <ul class="nav nav-tabs">
-          <li class="nav-item">
-            <a
-              class="nav-link active"
-              href="#employees"
-              id="employeesTab"
-              data-toggle="tab"
-              >Employees</a
-            >
-          </li>
-          
-        </ul>
-        <div class="tab-content">
-          <div role="tabpanel" class="tab-pane active" id="employees">
-            <button class="btn btn-success
-             mb-3" id="add-employee" data-toggle="modal" data-target="#exampleModalCenter"><i class="fas fa-plus"></i> 
-              add new employee
-            </button>
+    <div class="container">
+      <ul class="nav nav-tabs">
+        <li class="nav-item">
+          <a class="nav-link active" href="#employees" id="employeesTab" data-toggle="tab">Employees</a>
+        </li>
 
-            <table
-              id="example"
-              class="table table-striped table-bordered mb-5"
-              style="width:100%"
-            >
-              <thead>
-                <tr>
-                  <th>First Name</th>
-                  <th>Lastname</th>
-                  <th>Position</th>
-                  <th>Gender</th>
-                  <th>Phone</th>
-                  <th>attendance status</th>
-                  <th>Action</th>
-                </tr>
-              </thead>
-              <tbody id="tbody">
-                  
-              </tbody>
-             
-            </table>
-          </div>
-          <div role="tabpanel" class="tab-pane" id="attendance">
-            <h3>attendance status</h3>
-          </div>
+      </ul>
+      <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="employees">
+          <button class="btn btn-success
+             mb-3" id="add-employee" data-toggle="modal" data-target="#exampleModalCenter"><i
+              class="fas fa-plus"></i>
+            add new employee
+          </button>
+
+          <table id="example" class="table table-striped table-bordered mb-5" style="width:100%">
+            <thead>
+              <tr>
+                <th>First Name</th>
+                <th>Lastname</th>
+                <th>Position</th>
+                <th>Gender</th>
+                <th>Phone</th>
+                <th>attendance status</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="tbody">
+
+            </tbody>
+
+          </table>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="attendance">
+          <h3>attendance status</h3>
         </div>
       </div>
-    </main>
+    </div>
+  </main>
 
-    <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
-    <script src="js/jquery.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/sweetalert2.all.min.js"></script>
-    <script src="js/datatables.min.js"></script>
-    <script src="js/bootstrap.datatables.min.js"></script>
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <script src="js/request.js"></script>
-    <script src="js/alert.js"></script>
-    <script src="js/app.js"></script>
-  </body>
+
+
+  <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
+  <script src="js/jquery.js"></script>
+
+  <script>
+    //Check to see if there exists any admin key on localstorage else redirect back to login page
+    $(document).ready(() => {
+      let loginCredentials = JSON.parse(localStorage.getItem('admin'));
+      if (loginCredentials === null) {
+        location.replace('index.html');
+      }
+      $('#logoutBtn').on('click', () => {
+        localStorage.removeItem('admin');
+      });
+    })
+  </script>
+
+  <script src="js/popper.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/sweetalert2.all.min.js"></script>
+  <script src="js/datatables.min.js"></script>
+  <script src="js/bootstrap.datatables.min.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+  <script src="js/request.js"></script>
+  <script src="js/alert.js"></script>
+  <script src="js/app.js"></script>
+</body>
+
 </html>

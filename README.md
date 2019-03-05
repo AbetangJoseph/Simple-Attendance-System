@@ -21,10 +21,11 @@ To start the server run
 Bravo 👍 now your API server is running at http://localhost:3000/
 
 ### Features
-- Admin can Create new employee record
+- Admin can Create new employee
 - Admin can Read/View all employees
 - Admin can Read/View a single employee
 - Admin can Update employee meeting attendance status
+- Admin can Update an employee
 - Admin can Delete an employee
 
 ## Credits

@@ -24,12 +24,13 @@
     <nav class="navbar navbar-dark mb-5" style="background-color: #229954;">
       <div class="container">
         <a class="navbar-brand" href="#">Simple Meeting Attendance System</a>
-        <div>
-          <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-              <a class="nav-link" href="index.html" id="logoutBtn"><i class="fas fa-power-off"></i> Logout <span class="sr-only">(current)</span></a>
-            </li>
-          </ul>
+        <div class="dropdown">
+            <a class="btn btn-success dropdown-toggle" style="background-color: #229954;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i> Admin
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="nav-link" href="index.html" id="logoutBtn"><i class="fas fa-power-off"></i> Logout </a>
+            </div>
         </div>
       </div>
     </nav>

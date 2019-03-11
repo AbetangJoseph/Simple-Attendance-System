@@ -23,18 +23,19 @@
  
     <main>
       <!--START OF NAVBAR-->
-      <nav class="navbar navbar-dark mb-5" style="background-color: #229954;">
-        <div class="container">
-          <a class="navbar-brand" href="#">Simple Meeting Attendance System</a>
-          <div>
-            <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                <a class="nav-link" href="index.html"><i class="fas fa-power-off"></i> Logout <span class="sr-only">(current)</span></a>
-              </li>
-            </ul>
-          </div>
+       <nav class="navbar navbar-dark mb-5" style="background-color: #229954;">
+      <div class="container">
+        <a class="navbar-brand" href="#">Meeting Attendance System</a>
+        <div class="dropdown">
+            <a class="btn btn-success dropdown-toggle" style="background-color: #229954;" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-user"></i> Admin
+            </a>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                <a class="nav-link" href="index.html" id="logoutBtn"><i class="fas fa-power-off"></i> Logout </a>
+            </div>
         </div>
-      </nav>
+      </div>
+    </nav>
       <!--End OF NAVBAR-->
   
   <!-- START OF ADD EMPLOYEE MODAL -->
@@ -86,8 +87,8 @@
                           type="tel"
                           class="form-control form-control-warning"
                           placeholder="Phone No."
-                          minlength="14"
-                          maxlength="12"
+                          minlength="11"
+                          maxlength="11"
                           id="phone"  
                         >
                         
@@ -207,6 +208,18 @@
 
     <!-- <script src="https://code.jquery.com/jquery-1.12.4.js"></script> -->
     <script src="js/jquery.js"></script>
+    <script>
+    //Check to see if there exists any admin key on localstorage else redirect back to login page
+    $(document).ready(() => {
+      let loginCredentials = JSON.parse(localStorage.getItem('admin'));
+      if (loginCredentials === null) {
+        location.replace('index.html');
+      }
+      $('#logoutBtn').on('click', () => {
+        localStorage.removeItem('admin');
+      });
+    })
+  </script>
     <script src="js/popper.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/sweetalert2.all.min.js"></script>

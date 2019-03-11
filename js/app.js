@@ -19,7 +19,7 @@ let FetchAllEmployees = () => {
                <td>${employees.position}</td>
                <td>${employees.gender}</td>
                <td>${employees.phone}</td>
-               <td><input type="text" id="${employees.id}" onmousedown=picDate(event) placeholder="pick attendance date"> <button class="btn btn-outline-dark" onclick=updateEmployeeStatus(${employees.id})>update</button></td>            
+               <td><input type="text" id="${employees.id}" class="datetext" onmousedown=picDate(event) placeholder="pick attendance date"> <button class="btn btn-outline-dark" onclick=updateEmployeeStatus(${employees.id})>update</button></td>            
                <td><span><button class="btn btn-outline-secondary" onclick=getEmployee(${
                  employees.id
                }) data-toggle="modal" data-target="#employeeDetials"><i class="fas fa-eye"></i></button> <button class="btn btn-outline-primary" data-toggle="modal" data-target="#updateEmployee" onclick= "updateEmployee(${

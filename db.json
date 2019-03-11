@@ -8,19 +8,10 @@
       "firstname": "Joseph",
       "lastname": "Abetang",
       "gender": "Male",
-      "position": "Software Developer",
+      "position": "Developer",
       "phone": "08122773761",
       "attendance": [],
       "id": 1
-    },
-    {
-      "firstname": "Mark",
-      "lastname": "Zuckerberg",
-      "gender": "Male",
-      "position": "C.E.O",
-      "phone": "1-463-123-44",
-      "attendance": [],
-      "id": 2
     },
     {
       "firstname": "Jane",
@@ -28,6 +19,15 @@
       "gender": "Female",
       "position": "Technical Team Lead",
       "phone": "08123456789",
+      "attendance": [],
+      "id": 2
+    },
+    {
+      "firstname": "John",
+      "lastname": "Bull",
+      "gender": "Male",
+      "position": "TTL",
+      "phone": "08124244241",
       "attendance": [],
       "id": 3
     }

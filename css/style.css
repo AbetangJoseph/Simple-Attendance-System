@@ -11,3 +11,8 @@
   background-color: #5FBA7D !important;
   color: #ffffff !important;
 }
+
+thead {
+  background-color: #229954;
+  color: #ffffff;
+}

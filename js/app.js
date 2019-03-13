@@ -296,7 +296,7 @@ $(document).ready(() => {
     } else {
       const res = await request('post', 'employees', payload);
       $("form :input").val("");
-      notify(res.status, res.message);     
+      notify(res.status, res.message);    
     }
   });
 

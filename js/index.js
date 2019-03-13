@@ -17,7 +17,7 @@ $(document).ready(() => {
         
         //login fields
         let $username = $('#username').val().trim();
-        let $password = $('#password').val().trim();
+        let $password = $('#password').val();
 
         if ($username == '' || $password == '') {
             const Toast = Swal.mixin({
